@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
 
-// 1) Context lưu id panel đang mở (chỉ 1 panel active tại 1 thời điểm)
 interface AccordionContextType {
   activeId: string | null;
   toggle: (id: string) => void;
@@ -14,7 +13,6 @@ function useAccordionContext() {
   return ctx;
 }
 
-// 2) Component cha: cung cấp Context, quản lý state "activeId"
 interface AccordionProps {
   defaultActiveId?: string | null;
   children: ReactNode;
@@ -22,8 +20,6 @@ interface AccordionProps {
 function Accordion({ defaultActiveId = null, children }: AccordionProps) {
   const [activeId, setActiveId] = useState<string | null>(defaultActiveId);
 
-  // Mở panel này thì tự động đóng panel khác:
-  // nếu click lại panel đang mở -> đóng luôn (activeId = null)
   const toggle = (id: string) => {
     setActiveId((prev) => (prev === id ? null : id));
   };
@@ -35,7 +31,6 @@ function Accordion({ defaultActiveId = null, children }: AccordionProps) {
   );
 }
 
-// 3) Item: bọc 1 cặp Header + Panel, truyền "id" xuống qua Context riêng của Item
 interface AccordionItemContextType {
   id: string;
 }
@@ -59,7 +54,6 @@ function Item({ id, children }: AccordionItemProps) {
   );
 }
 
-// 4) Header: click để mở/đóng panel tương ứng
 interface AccordionHeaderProps {
   children: ReactNode;
 }
@@ -78,7 +72,7 @@ function Header({ children }: AccordionHeaderProps) {
   );
 }
 
-// 5) Panel: chỉ hiển thị nội dung khi id trùng với activeId
+
 interface AccordionPanelProps {
   children: ReactNode;
 }
@@ -96,14 +90,3 @@ Accordion.Panel = Panel;
 
 export default Accordion;
 
-// ----- Ví dụ sử dụng -----
-// <Accordion defaultActiveId="faq1">
-//   <Accordion.Item id="faq1">
-//     <Accordion.Header>Câu hỏi 1</Accordion.Header>
-//     <Accordion.Panel>Nội dung trả lời 1</Accordion.Panel>
-//   </Accordion.Item>
-//   <Accordion.Item id="faq2">
-//     <Accordion.Header>Câu hỏi 2</Accordion.Header>
-//     <Accordion.Panel>Nội dung trả lời 2</Accordion.Panel>
-//   </Accordion.Item>
-// </Accordion>
