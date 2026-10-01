@@ -10,7 +10,7 @@ interface ProductCardProps {
 }
 
 function ProductCard({ product }: ProductCardProps) {
-  // Selector chỉ subscribe đúng 1 phần state cần dùng -> tránh re-render thừa
+ 
   const isFavorite = useFavoritesStore((state) =>
     state.favoriteIds.includes(product.id),
   )
