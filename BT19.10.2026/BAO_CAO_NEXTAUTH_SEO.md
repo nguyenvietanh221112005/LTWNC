@@ -91,11 +91,6 @@ Component + Server Action, và SEO nâng cao cho 3 trang công khai
 | `<meta property="og:*">` | — (không có) | `og:title`, `og:description`, `og:image` (1200×630, PNG sinh động) |
 | `<script type="application/ld+json">` | — (không có) | JSON-LD `Product` + `Offer` (giá, tình trạng còn hàng) trên trang chi tiết; JSON-LD `Organization` trên trang chủ |
 
-Đã kiểm tra bằng `curl` trực tiếp vào HTML server trả về (tương đương
-"View page source" mà bot tìm kiếm thấy, không phải tab Elements đã chạy
-JS) — toàn bộ thẻ trên nằm sẵn trong HTML vì `/`, `/products`,
-`/products/[id]` vẫn là SSG/ISR (xem bảng route bên dưới), không bị kéo
-thành trang động chỉ vì có đăng nhập (xem mục 5).
 
 ## 5. Lighthouse — trước/sau 
 
